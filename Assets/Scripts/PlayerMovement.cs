@@ -21,6 +21,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        MoveCubeForward();
+    }
+
+    private void MoveCubeForward()
+    {
         Vector3 forwardVector = new Vector3(0.0f, 0.0f, 1f); // Can be replaced by Vector3.forward
         transform.Translate(forwardVector * (m_speed * Time.deltaTime));
     }
