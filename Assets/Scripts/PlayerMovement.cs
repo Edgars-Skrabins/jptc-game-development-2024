@@ -5,28 +5,37 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // [SerializeField] private string m_myText = "Hello world!";
+    // PascalCase
+    // camelCase
+    // kebab-case
+    // snake_case
+    // SCREAMING_SNAKE_CASE
 
-    // private void Start()
-    // {
-    //     LogMyText();
-    // }
-    //
-    // private void LogMyText()
-    // {
-    //     Debug.Log(m_myText);
-    // }
-
+    [SerializeField] private Rigidbody m_rb;
     [SerializeField] private float m_speed;
+
+    private void Start()
+    {
+        InitializeClassVariables();
+    }
+
+    private void InitializeClassVariables()
+    {
+        m_rb = GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
-        MoveCubeForward();
+        MovePlayer();
     }
 
-    private void MoveCubeForward()
+    private void MovePlayer()
     {
-        Vector3 forwardVector = new Vector3(0.0f, 0.0f, 1f); // Can be replaced by Vector3.forward
-        transform.Translate(forwardVector * (m_speed * Time.deltaTime));
+        float xVelocity = Input.GetAxisRaw("Horizontal");
+        float yVelocity = Input.GetAxisRaw("Vertical");
+        // Debug.Log(xVelocity);
+        Vector3 velocity = new Vector3(xVelocity,0f,yVelocity);
+        // Debug.Log($"Velocity is {velocity}");
+        m_rb.velocity = velocity * m_speed;
     }
 }
