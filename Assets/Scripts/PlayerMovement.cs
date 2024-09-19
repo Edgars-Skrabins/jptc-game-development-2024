@@ -33,9 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float xVelocity = Input.GetAxisRaw("Horizontal");
         float yVelocity = Input.GetAxisRaw("Vertical");
-        // Debug.Log(xVelocity);
-        Vector3 velocity = new Vector3(xVelocity,0f,yVelocity);
-        // Debug.Log($"Velocity is {velocity}");
+        Vector3 velocity = new Vector3(xVelocity, 0f, yVelocity).normalized;
         m_rb.velocity = velocity * m_speed;
     }
 }
