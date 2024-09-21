@@ -1,17 +1,43 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    private int damage = 1000;
+    [Header("Attack settings")]
+    [Space(5)]
+    [SerializeField] private int m_damage;
+    [Space(5)]
+    [Header("Score settings")]
+    [Space(5)]
+    [SerializeField] private TextMeshProUGUI m_scoreTXT;
+    [SerializeField] private int m_scoreAdditionAmount;
+    private int m_score;
+
     private void OnCollisionEnter(Collision _collision)
     {
         if (_collision.collider.CompareTag("Enemy"))
         {
-            Health health = _collision.collider.gameObject.GetComponent<Health>();
-            health.TakeDamage(damage);
+            DamageOnCollision(_collision);
         }
+    }
+
+    private void DamageOnCollision(Collision _collision)
+    {
+        if (_collision.gameObject.TryGetComponent(out Health health))
+        {
+            UpdateScore();
+            health.TakeDamage(m_damage);
+        }
+    }
+
+    private void UpdateScore()
+    {
+        m_score += m_scoreAdditionAmount;
+        UpdateScoreUI();
+    }
+
+    private void UpdateScoreUI()
+    {
+        m_scoreTXT.text = m_score.ToString();
     }
 }
