@@ -13,6 +13,11 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private int m_scoreAdditionAmount;
     private int m_score;
 
+    private void Start()
+    {
+        UpdateScore(PlayerPrefs.GetInt("SCORE"));
+    }
+
     private void OnCollisionEnter(Collision _collision)
     {
         if (_collision.collider.CompareTag("Enemy"))
@@ -33,6 +38,13 @@ public class PlayerCollision : MonoBehaviour
     private void UpdateScore()
     {
         m_score += m_scoreAdditionAmount;
+        PlayerPrefs.SetInt("SCORE", m_score);
+        UpdateScoreUI();
+    }
+
+    private void UpdateScore(int _score)
+    {
+        m_score += _score;
         UpdateScoreUI();
     }
 
