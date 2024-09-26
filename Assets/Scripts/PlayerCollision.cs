@@ -15,7 +15,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void Start()
     {
-        UpdateScore(PlayerPrefs.GetInt("SCORE"));
+        SetScore(PlayerPrefs.GetInt("SCORE"));
     }
 
     private void OnCollisionEnter(Collision _collision)
@@ -45,6 +45,12 @@ public class PlayerCollision : MonoBehaviour
     private void UpdateScore(int _score)
     {
         m_score += _score;
+        UpdateScoreUI();
+    }
+
+    private void SetScore(int _score)
+    {
+        m_score = _score;
         UpdateScoreUI();
     }
 
