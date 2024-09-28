@@ -2,14 +2,19 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int m_health;
+    [SerializeField] protected int m_health;
 
-    public void TakeDamage(int _damage)
+    public virtual void TakeDamage(int _damage)
     {
         m_health -= _damage;
         if (m_health <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    protected virtual void Die()
+    {
+        Destroy(gameObject);
     }
 }
